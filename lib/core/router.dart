@@ -4,6 +4,10 @@ import '../features/auth/controllers/auth_controller.dart';
 import '../features/auth/screens/login_screen.dart';
 import '../features/auth/screens/register_screen.dart';
 import '../features/dashboard/screens/dashboard_screen.dart';
+import '../features/timetable/screens/timetable_screen.dart';
+import '../features/assignments/screens/assignments_screen.dart';
+import '../features/profile/screens/profile_screen.dart';
+import 'widgets/main_shell.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateProvider);
@@ -15,17 +19,12 @@ final routerProvider = Provider<GoRouter>((ref) {
       final isOnAuthScreen =
           state.matchedLocation == '/login' || state.matchedLocation == '/register';
 
-      // Not logged in, trying to access anything other than login/register -> bounce to login.
       if (!isLoggedIn && !isOnAuthScreen) {
         return '/login';
       }
-
-      // Logged in, but sitting on login/register -> send to dashboard.
       if (isLoggedIn && isOnAuthScreen) {
         return '/dashboard';
       }
-
-      // Otherwise, no redirect needed.
       return null;
     },
     routes: [
@@ -37,9 +36,44 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/register',
         builder: (context, state) => const RegisterScreen(),
       ),
-      GoRoute(
-        path: '/dashboard',
-        builder: (context, state) => const DashboardScreen(),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return MainShell(navigationShell: navigationShell);
+        },
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/dashboard',
+                builder: (context, state) => const DashboardScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/timetable',
+                builder: (context, state) => const TimetableScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/assignments',
+                builder: (context, state) => const AssignmentsScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/profile',
+                builder: (context, state) => const ProfileScreen(),
+              ),
+            ],
+          ),
+        ],
       ),
     ],
   );
