@@ -8,6 +8,7 @@ import '../features/timetable/screens/timetable_screen.dart';
 import '../features/assignments/screens/assignments_screen.dart';
 import '../features/profile/screens/profile_screen.dart';
 import 'widgets/main_shell.dart';
+import '../features/attendance/screens/attendance_screen.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateProvider);
@@ -65,6 +66,15 @@ final routerProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
+
+          StatefulShellBranch(
+  routes: [
+    GoRoute(
+      path: '/attendance',
+      builder: (context, state) => const AttendanceScreen(),
+    ),
+  ],
+),
           StatefulShellBranch(
             routes: [
               GoRoute(

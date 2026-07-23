@@ -20,11 +20,12 @@ class MainShell extends StatelessWidget {
           );
         },
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.dashboard_outlined), label: 'Dashboard'),
-          NavigationDestination(icon: Icon(Icons.calendar_month_outlined), label: 'Timetable'),
-          NavigationDestination(icon: Icon(Icons.assignment_outlined), label: 'Assignments'),
-          NavigationDestination(icon: Icon(Icons.person_outline), label: 'Profile'),
-        ],
+  NavigationDestination(icon: Icon(Icons.dashboard_outlined), label: 'Dashboard'),
+  NavigationDestination(icon: Icon(Icons.calendar_month_outlined), label: 'Timetable'),
+  NavigationDestination(icon: Icon(Icons.assignment_outlined), label: 'Assignments'),
+  NavigationDestination(icon: Icon(Icons.check_circle_outline), label: 'Attendance'),
+  NavigationDestination(icon: Icon(Icons.person_outline), label: 'Profile'),
+],
       ),
     );
   }
